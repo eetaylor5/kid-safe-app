@@ -1,6 +1,5 @@
 screen_helper = """
 ScreenManager:
-    id: scr_mngr
     HomeScreen:
     NOOScreen:
     SOSScreen:
@@ -24,14 +23,14 @@ ScreenManager:
     name: "home"
     MDGridLayout:
         cols: 2
-        Button:
-            #text: "911"
-            background_normal: 'resources/911.png'
-            on_press: root.manager.current = "noo"
-        Button:
-            #text: "SOS Text"
-            background_normal: 'resources/help.png'
-            on_press: root.manager.current = "sos"
+        # Button:
+        #     #text: "911"
+        #     background_normal: 'resources/911.png'
+        #     on_press: root.manager.current = "noo"
+        # Button:
+        #     #text: "SOS Text"
+        #     background_normal: 'resources/help.png'
+        #     on_press: root.manager.current = "sos"
         Button:
             #text: "Fire"
             background_normal: 'resources/fire.png'
@@ -62,29 +61,29 @@ ScreenManager:
         Button:
             text: "Parental Control"
             on_press: root.manager.current = "parent"
-<NOOScreen>:
-    name: "noo"
-    MDLabel:
-        text: "Calling 911..."
-        halign: "center"
-    MDRectangleFlatButton:
-        text: "Back"
-        pos_hint: {"center_x":0.5, "center_y":0.2}
-        on_press: root.manager.current = "home"
-<SOSScreen>:
-    name: "sos"
-    MDLabel:
-        text: "Calling SOS Contacts..."
-        halign: "center"
-    MDRectangleFlatButton:
-        text: "Back"
-        pos_hint: {"center_x":0.5, "center_y":0.2}
-        on_press: root.manager.current = "home"
+# <NOOScreen>:
+#     name: "noo"
+#     MDLabel:
+#         text: "Calling 911..."
+#         halign: "center"
+#     MDRectangleFlatButton:
+#         text: "Back"
+#         pos_hint: {"center_x":0.5, "center_y":0.2}
+#         on_press: root.manager.current = "home"
+# <SOSScreen>:
+#     name: "sos"
+#     MDLabel:
+#         text: "Calling SOS Contacts..."
+#         halign: "center"
+#     MDRectangleFlatButton:
+#         text: "Back"
+#         pos_hint: {"center_x":0.5, "center_y":0.2}
+#         on_press: root.manager.current = "home"
 <FireScreen>:
     name: "fire"
     MDLabel:
         id: fire_label
-        text: "Fire info"
+#        text: "Fire info"
         halign: "center"
     MDRectangleFlatButton:
         text: "Back"
@@ -93,7 +92,8 @@ ScreenManager:
 <FirstAidScreen>:
     name: "first_aid"
     MDLabel:
-        text: "First aid info"
+        id: first_aid_label
+#        text: "First aid info"
         halign: "center"
     MDRectangleFlatButton:
         text: "Back"
@@ -102,7 +102,8 @@ ScreenManager:
 <StrangerScreen>:
     name: "stranger"
     MDLabel:
-        text: "Stranger Danger!"
+        id: stranger_label
+#        text: "Stranger Danger!"
         halign: "center"
     MDRectangleFlatButton:
         text: "Back"
@@ -111,7 +112,8 @@ ScreenManager:
 <WeatherScreen>:
     name: "weather"
     MDLabel:
-        text: "Severe weather info"
+        id: weather_label
+#        text: "Severe weather info"
         halign: "center"
     MDRectangleFlatButton:
         text: "Back"
@@ -120,7 +122,8 @@ ScreenManager:
 <PowerOutScreen>:
     name: "power_out"
     MDLabel:
-        text: "Power out info"
+        id: power_out_label
+#        text: "Power out info"
         halign: "center"
     MDRectangleFlatButton:
         text: "Back"
@@ -129,7 +132,8 @@ ScreenManager:
 <LockedOutScreen>:
     name: "locked_out"
     MDLabel:
-        text: "Locked out info"
+        id: locked_out_label
+#        text: "Locked out info"
         halign: "center"
     MDRectangleFlatButton:
         text: "Back"
@@ -172,16 +176,15 @@ ScreenManager:
                 OneLineIconListItem:
                     text: "Locked Out"
                     on_release: root.manager.current = "edit_locked_out"
-                OneLineIconListItem:
-                    text: "Contact Information"
-                    on_release: root.manager.current = "edit_contact_info"
+                # OneLineIconListItem:
+                #     text: "Contact Information"
+                #     on_release: root.manager.current = "edit_contact_info"
     MDRectangleFlatButton:
         text: "Home"
         pos_hint: {"center_x":0.5, "center_y":0.9}
         on_press: root.manager.current = "home"
 
 <EditFireScreen>:
-    id: edit_fire
     name: "edit_fire"
     MDLabel:
         text: "Enter fire instructions"
@@ -200,9 +203,12 @@ ScreenManager:
         max_height: "200dp"
         pos_hint: {"center_x":0.5,"center_y":0.5}
     MDRectangleFlatButton:
-        text: "Back"
+        text: "Save & Exit"
         pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press: app.get_fire_data()
+        on_press: 
+            root.manager.screens[3].ids.fire_label.text = "Fire Instructions: \\n" 
+            root.manager.screens[3].ids.fire_label.text += root.ids.fire_input.text
+            root.manager.current = 'parent'
 
 <EditFirstAidScreen>:
     name: "edit_first_aid"
@@ -217,17 +223,24 @@ ScreenManager:
         halign: "center"
         pos_hint: {"center_x":0.5,"center_y":0.7}
     MDTextField:
+        id: first_aid_input1
         multiline: True
         hint_text: "Where is the first aid kit? (bandaids, antiseptic, etc.)"
         pos_hint: {"center_x":0.5,"center_y":0.5}
     MDTextField:
+        id: first_aid_input2
         multiline: True
         hint_text: "Enter other relevant instructions here"
         pos_hint: {"center_x":0.5,"center_y":0.3}
     MDRectangleFlatButton:
-        text: "Back"
+        text: "Save & Exit"
         pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press: root.manager.current = "parent"
+        on_press: 
+            root.manager.screens[4].ids.first_aid_label.text = "Where to find first aid things: \\n"
+            root.manager.screens[4].ids.first_aid_label.text += root.ids.first_aid_input1.text
+            root.manager.screens[4].ids.first_aid_label.text += "\\n\\n First Aid Instructions: \\n"
+            root.manager.screens[4].ids.first_aid_label.text += root.ids.first_aid_input2.text
+            root.manager.current = "parent"
 
 <EditStrangerScreen>:
     name: "edit_stranger"
@@ -242,19 +255,26 @@ ScreenManager:
         halign: "center"
         pos_hint: {"center_x":0.5,"center_y":0.7}
     MDTextField:
+        id: stranger_input1
         multiline: True
         hint_text: "List any safety code word(s):"
         helper_text: "a word known by trusted adults only, to prove they can be trusted"
         helper_text_mode: "persistent"
         pos_hint: {"center_x":0.5,"center_y":0.5}
     MDTextField:
+        id: stranger_input2
         multiline: True
         hint_text: "Instructions in case of a break-in"
         pos_hint: {"center_x":0.5,"center_y":0.3}
     MDRectangleFlatButton:
-        text: "Back"
+        text: "Save & Exit"
         pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press: root.manager.current = "parent"
+        on_press: 
+            root.manager.screens[5].ids.stranger_label.text = "Safety code words: \\n"
+            root.manager.screens[5].ids.stranger_label.text += root.ids.stranger_input1.text
+            root.manager.screens[5].ids.stranger_label.text += "\\n\\n Break-in Instructions: \\n"
+            root.manager.screens[5].ids.stranger_label.text += root.ids.stranger_input2.text
+            root.manager.current = "parent"
 
 <EditWeatherScreen>:
     name: "edit_weather"
@@ -269,44 +289,96 @@ ScreenManager:
         halign: "center"
         pos_hint: {"center_x":0.5,"center_y":0.7}
     MDTextField:
+        id: weather_input
         multiline: True
         hint_text: "Enter instructions here"
         helper_text: "weather like hurricanes, tornadoes, tropical storms, etc."
         helper_text_mode: "persistent"
         pos_hint: {"center_x":0.5,"center_y":0.5}
     MDRectangleFlatButton:
-        text: "Back"
+        text: "Save & Exit"
         pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press: root.manager.current = "parent"
+        on_press: 
+            root.manager.screens[6].ids.weather_label.text = "Severe Weather Instructions: \\n" 
+            root.manager.screens[6].ids.weather_label.text += root.ids.weather_input.text
+            root.manager.current = 'parent'
 
 <EditPowerOutScreen>:
     name: "edit_power_out"
     MDLabel:
-        text: "Power out info (edit)"
+        text: "Enter power outage instructions"
+        font_style: "H6"
         halign: "center"
+        pos_hint: {"center_x":0.5,"center_y":0.8}
+    MDLabel:
+        text: "Be sure that your instructions can be understood by your child"
+        font_style: "Caption"
+        halign: "center"
+        pos_hint: {"center_x":0.5,"center_y":0.7}
+    MDTextField:
+        id: power_out_input1
+        multiline: True
+        hint_text: "Where are the flashlights?"
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+    MDTextField:
+        id: power_out_input2
+        multiline: True
+        hint_text: "Other relevant information:"
+        helper_text: "i.e. where to find candles, about a generator etc."
+        helper_text_mode: "persistent"
+        pos_hint: {"center_x":0.5,"center_y":0.3}
     MDRectangleFlatButton:
-        text: "Back"
+        text: "Save & Exit"
         pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press: root.manager.current = "parent"
+        on_press: 
+            root.manager.screens[7].ids.power_out_label.text = "Where to find flashlights: \\n"
+            root.manager.screens[7].ids.power_out_label.text += root.ids.power_out_input1.text
+            root.manager.screens[7].ids.power_out_label.text += "\\n\\n Power out Instructions: \\n"
+            root.manager.screens[7].ids.power_out_label.text += root.ids.power_out_input2.text
+            root.manager.current = "parent"
 
 <EditLockedOutScreen>:
     name: "edit_locked_out"
     MDLabel:
-        text: "Locked out info (edit)"
+        text: "Enter power outage instructions"
+        font_style: "H6"
         halign: "center"
-    MDRectangleFlatButton:
-        text: "Back"
-        pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press: root.manager.current = "parent"
-
-<EditContactInfoScreen>:
-    name: "edit_contact_info"
+        pos_hint: {"center_x":0.5,"center_y":0.8}
     MDLabel:
-        text: "Enter contact info here (edit)"
+        text: "Be sure that your instructions can be understood by your child"
+        font_style: "Caption"
         halign: "center"
+        pos_hint: {"center_x":0.5,"center_y":0.7}
+    MDTextField:
+        id: locked_out_input1
+        multiline: True
+        hint_text: "Where is the spare key?"
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+    MDTextField:
+        id: locked_out_input2
+        multiline: True
+        hint_text: "Other relevant information:"
+        helper_text: "i.e. who to call, where to go, etc."
+        helper_text_mode: "persistent"
+        pos_hint: {"center_x":0.5,"center_y":0.3}
     MDRectangleFlatButton:
-        text: "Back"
+        text: "Save & Exit"
         pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press: root.manager.current = "parent"
+        on_press: 
+            root.manager.screens[8].ids.locked_out_label.text = "Where to find spare key: \\n"
+            root.manager.screens[8].ids.locked_out_label.text += root.ids.locked_out_input1.text
+            root.manager.screens[8].ids.locked_out_label.text += "\\n\\n Locked out Instructions: \\n"
+            root.manager.screens[8].ids.locked_out_label.text += root.ids.locked_out_input2.text
+            root.manager.current = "parent"
+
+# <EditContactInfoScreen>:
+#     name: "edit_contact_info"
+#     MDLabel:
+#         text: "Enter contact info here (edit)"
+#         halign: "center"
+#     MDRectangleFlatButton:
+#         text: "Back"
+#         pos_hint: {"center_x":0.5, "center_y":0.1}
+#         on_press: root.manager.current = "parent"
 
 """
