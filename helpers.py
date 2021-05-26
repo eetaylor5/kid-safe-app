@@ -1,4 +1,5 @@
 screen_helper = """
+# Add each Screen to the ScreenManager
 ScreenManager:
     HomeScreen:
     NOOScreen:
@@ -19,6 +20,7 @@ ScreenManager:
     EditLockedOutScreen:
     EditContactInfoScreen:
 
+# Create the home screen with a button for each emergency that goes to the corresponding Screen
 <HomeScreen>:
     name: "home"
     MDGridLayout:
@@ -61,6 +63,7 @@ ScreenManager:
         Button:
             text: "Parental Control"
             on_press: root.manager.current = "parent"
+
 # <NOOScreen>:
 #     name: "noo"
 #     MDLabel:
@@ -70,6 +73,7 @@ ScreenManager:
 #         text: "Back"
 #         pos_hint: {"center_x":0.5, "center_y":0.2}
 #         on_press: root.manager.current = "home"
+
 # <SOSScreen>:
 #     name: "sos"
 #     MDLabel:
@@ -79,6 +83,8 @@ ScreenManager:
 #         text: "Back"
 #         pos_hint: {"center_x":0.5, "center_y":0.2}
 #         on_press: root.manager.current = "home"
+
+# Define the fire Screen to display the given input
 <FireScreen>:
     name: "fire"
     MDLabel:
@@ -89,6 +95,8 @@ ScreenManager:
         text: "Back"
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press: root.manager.current = "home"
+
+# Define the first aid Screen to display the given input
 <FirstAidScreen>:
     name: "first_aid"
     MDLabel:
@@ -99,6 +107,8 @@ ScreenManager:
         text: "Back"
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press: root.manager.current = "home"
+
+# Define the stranger danger Screen to display the given input
 <StrangerScreen>:
     name: "stranger"
     MDLabel:
@@ -109,6 +119,8 @@ ScreenManager:
         text: "Back"
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press: root.manager.current = "home"
+
+# Define the severe weather Screen to display the given input
 <WeatherScreen>:
     name: "weather"
     MDLabel:
@@ -119,6 +131,8 @@ ScreenManager:
         text: "Back"
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press: root.manager.current = "home"
+
+# Define the power outage Screen to display the given input
 <PowerOutScreen>:
     name: "power_out"
     MDLabel:
@@ -129,6 +143,8 @@ ScreenManager:
         text: "Back"
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press: root.manager.current = "home"
+
+# Define the locked out Screen to display the given input
 <LockedOutScreen>:
     name: "locked_out"
     MDLabel:
@@ -139,6 +155,8 @@ ScreenManager:
         text: "Back"
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press: root.manager.current = "home"
+
+# Define the contact information Screen to display the given input
 <ContactInfoScreen>:
     name: "contact_info"
     MDLabel:
@@ -148,6 +166,8 @@ ScreenManager:
         text: "Back"
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press: root.manager.current = "home"
+
+# Define the parent Screen with a menu of emergencies for the parent to chose from
 <ParentScreen>:
     name: "parent"
     BoxLayout:
@@ -184,6 +204,7 @@ ScreenManager:
         pos_hint: {"center_x":0.5, "center_y":0.9}
         on_press: root.manager.current = "home"
 
+# Define the edit fire Screen to get the input from the user
 <EditFireScreen>:
     name: "edit_fire"
     MDLabel:
@@ -210,6 +231,7 @@ ScreenManager:
             root.manager.screens[3].ids.fire_label.text += root.ids.fire_input.text
             root.manager.current = 'parent'
 
+# Define the edit first aid Screen to get the input from the user
 <EditFirstAidScreen>:
     name: "edit_first_aid"
     MDLabel:
@@ -242,6 +264,7 @@ ScreenManager:
             root.manager.screens[4].ids.first_aid_label.text += root.ids.first_aid_input2.text
             root.manager.current = "parent"
 
+# Define the edit stranger danger Screen to get the input from the user
 <EditStrangerScreen>:
     name: "edit_stranger"
     MDLabel:
@@ -276,6 +299,7 @@ ScreenManager:
             root.manager.screens[5].ids.stranger_label.text += root.ids.stranger_input2.text
             root.manager.current = "parent"
 
+# Define the edit severe weather Screen to get the input from the user
 <EditWeatherScreen>:
     name: "edit_weather"
     MDLabel:
@@ -303,6 +327,7 @@ ScreenManager:
             root.manager.screens[6].ids.weather_label.text += root.ids.weather_input.text
             root.manager.current = 'parent'
 
+# Define the edit power outage Screen to get the input from the user
 <EditPowerOutScreen>:
     name: "edit_power_out"
     MDLabel:
@@ -337,6 +362,7 @@ ScreenManager:
             root.manager.screens[7].ids.power_out_label.text += root.ids.power_out_input2.text
             root.manager.current = "parent"
 
+# Define the edit locked out Screen to get the input from the user
 <EditLockedOutScreen>:
     name: "edit_locked_out"
     MDLabel:
