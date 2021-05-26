@@ -13,4 +13,5 @@ This is the most up-to-date repository.
     - Kivy
     - Kivy-Garden
     - kivymd
+
  Once those have been added, you should be able to just run main.py. Please reach out to me if you have any questions or if it won't run.
