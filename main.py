@@ -4,8 +4,10 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from helpers import screen_helper
 from kivy.core.window import Window
 
-Window.size = (450,500)
+#Window.size = (450,500)
 
+
+# Create a class for each Screen
 
 class HomeScreen(Screen):
    pass
@@ -61,6 +63,7 @@ class EditLockedOutScreen(Screen):
 class EditContactInfoScreen(Screen):
    pass
 
+# Initialize a ScreenManager and add each screen to it to display them
 sm = ScreenManager()
 sm.add_widget(HomeScreen(name="home"))
 #sm.add_widget(NOOScreen(name="noo"))
@@ -83,10 +86,12 @@ sm.add_widget(EditLockedOutScreen(name="edit_locked_out"))
 
 class KidSafeApp(MDApp):
   def build(self):
+      # Create a theme for the overall app
       self.theme_cls.primary_palette = "Gray"
       self.theme_cls.primary_hue = "A700"
       self.theme_cls.theme_style = "Light"
 
+      # Use builder to launch the app with the functionality in screen_helper from helpers.py
       screen = Builder.load_string(screen_helper)
       return screen
 
